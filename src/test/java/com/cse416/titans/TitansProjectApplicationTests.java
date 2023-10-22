@@ -1,10 +1,10 @@
-package com.titans.server;
+package com.cse416.titans;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ServerApplicationTests {
+class TitansProjectApplicationTests {
 
 	@Test
 	void contextLoads() {
