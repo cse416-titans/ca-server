@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cse416.titans.models.DistrictPlan;
-import com.cse416.titans.restservice.DistrictPlanService;
+import com.cse416.titans.service.DistrictPlanService;
 
 import lombok.AllArgsConstructor;
 

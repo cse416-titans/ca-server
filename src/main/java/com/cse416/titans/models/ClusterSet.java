@@ -8,11 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Getter;
 
 @Getter
-@Document(collection="DistrictPlans")
-public class DistrictPlan {
+@Document(collection = "ClusterSets")
+public class ClusterSet {
     @Id
     private String id;
     private String name;
-    private String clusterId;
-    private Set<District> districts;
+    private String ensembleId;
+    private String distanceMeasureId;
+    private Set<Cluster> clusters;
 }
