@@ -1,12 +1,10 @@
 package com.cse416.titans;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cse416.titans.models.DistrictPlan;
-import com.cse416.titans.service.DistrictPlanService;
+import com.cse416.titans.models.Ensemble;
+import com.cse416.titans.service.EnsembleService;
 
 import lombok.AllArgsConstructor;
 
@@ -14,10 +12,16 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ClientController {
 
-    private final DistrictPlanService districtPlanService;
+    private final EnsembleService ensembleService;
 
-    @GetMapping("/plan")
-    public List<DistrictPlan> getAllDistrictPlans() {
-        return districtPlanService.getAllDistrictPlans();
+    @GetMapping("/ensemble")
+    public Ensemble getEnsemble() {
+        return ensembleService.getEnsembleByName("Ensemble1");
     }
+
+    @GetMapping("/hi")
+    public String Hello() {
+        return "HELLO!";
+    }
+    
 }

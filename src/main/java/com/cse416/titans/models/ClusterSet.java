@@ -1,13 +1,13 @@
 package com.cse416.titans.models;
 
-import java.util.Set;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
+@Data
+@AllArgsConstructor
 @Document(collection = "ClusterSets")
 public class ClusterSet {
     @Id
@@ -15,5 +15,5 @@ public class ClusterSet {
     private String name;
     private String ensembleId;
     private String distanceMeasureId;
-    private Set<Cluster> clusters;
+    //private List<Cluster> clusters;
 }

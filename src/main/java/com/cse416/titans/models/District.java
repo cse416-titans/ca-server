@@ -3,9 +3,9 @@ package com.cse416.titans.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @Document(collection = "Districts")
 public class District {
     @Id
