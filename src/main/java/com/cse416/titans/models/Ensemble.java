@@ -7,10 +7,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @AllArgsConstructor
 @Document(collection = "Ensembles")
 public class Ensemble {
@@ -18,7 +21,8 @@ public class Ensemble {
     private String id;
     private String name;
     private String stateId;
-    @DocumentReference(lazy = true)
+    @DocumentReference(lazy = true)  
+    @JsonIgnore
     private List<ClusterSet> clusterSets;
 
     public ClusterSet getClusterSet(String distanceMeasureId) {
@@ -28,6 +32,7 @@ public class Ensemble {
             .orElseThrow(NoSuchElementException::new);
     }
 
+    @JsonIgnore
     public String getDistanceMeasureEvaluation() {
         // TODO: Implement
         return null;
