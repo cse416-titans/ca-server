@@ -2,7 +2,7 @@ package com.cse416.titans.service;
 
 import org.springframework.stereotype.Service;
 
-import com.cse416.titans.models.Ensemble;
+import com.cse416.titans.model.Ensemble;
 import com.cse416.titans.repository.EnsembleRepo;
 
 @Service
@@ -14,7 +14,7 @@ public class EnsembleService {
         this.ensembleRepo = ensembleRepo;
     }
 
-    public Ensemble getEnsembleByName(String name) {
-        return ensembleRepo.findByEnsembleId(name);
+    public Ensemble getEnsembleById(String ensembleId) {
+        return ensembleRepo.findByEnsembleId(ensembleId);
     }
 }

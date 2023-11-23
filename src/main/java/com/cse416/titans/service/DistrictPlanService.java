@@ -2,7 +2,7 @@ package com.cse416.titans.service;
 
 import org.springframework.stereotype.Service;
 
-import com.cse416.titans.models.DistrictPlan;
+import com.cse416.titans.model.DistrictPlan;
 import com.cse416.titans.repository.DistrictPlanRepo;
 
 @Service

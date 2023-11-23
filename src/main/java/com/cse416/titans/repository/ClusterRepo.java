@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.cse416.titans.models.Cluster;
+import com.cse416.titans.model.Cluster;
 
 @Repository
 public interface ClusterRepo extends MongoRepository<Cluster, String>{

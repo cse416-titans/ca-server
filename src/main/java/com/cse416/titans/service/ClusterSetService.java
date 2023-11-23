@@ -2,7 +2,7 @@ package com.cse416.titans.service;
 
 import org.springframework.stereotype.Service;
 
-import com.cse416.titans.models.ClusterSet;
+import com.cse416.titans.model.ClusterSet;
 import com.cse416.titans.repository.ClusterSetRepo;
 
 @Service
