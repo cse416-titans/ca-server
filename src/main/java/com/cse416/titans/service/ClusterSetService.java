@@ -17,4 +17,12 @@ public class ClusterSetService {
     public ClusterSet getClusterSetByEnsembleAndDMId(String ensembleId, String distanceMeasureId){
         return clusterSetRepo.findByEnsembleAndDMId(ensembleId, distanceMeasureId);
     }
+
+    public ClusterSet getClusterSetById(String clusterSetId){
+        return clusterSetRepo.findByClusterSetId(clusterSetId);
+    }
+
+    public void addClusterSet(ClusterSet clusterSet) {
+        clusterSetRepo.save(clusterSet);
+    }
 }

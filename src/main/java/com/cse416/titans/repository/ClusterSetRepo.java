@@ -12,4 +12,7 @@ public interface ClusterSetRepo extends MongoRepository<ClusterSet, String>{
     
     @Query("{ensembleId: ?0, distanceMeasureId: ?1}")
     ClusterSet findByEnsembleAndDMId(String ensembleId, String distanceMeasureId);
+
+    @Query("{id: ?0}")
+    ClusterSet findByClusterSetId(String clusterSetId);
 }

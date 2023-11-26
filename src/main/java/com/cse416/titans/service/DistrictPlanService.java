@@ -17,4 +17,8 @@ public class DistrictPlanService {
     public DistrictPlan getPlanById(String planId){
         return districtPlanRepo.findByPlanId(planId);   
     }
+
+    public void addPlan(DistrictPlan plan) {
+        districtPlanRepo.save(plan);
+    }
 }

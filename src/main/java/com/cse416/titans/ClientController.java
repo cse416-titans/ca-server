@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cse416.titans.model.Ensemble;
 import com.cse416.titans.serviceHandler.ServiceHandler;
 
 @RestController
@@ -64,10 +65,15 @@ public class ClientController {
         return null;
     }
 
-    // @GetMapping("/ensemble")
-    // public Ensemble getEnsemble() {
-    //     return ensembleService.getEnsembleById("Ensemble1");
-    // }
+    @GetMapping("/ensemble1")
+    public Ensemble getEnsemble() {
+        return serviceHandler.getEnsemble("Ensemble1");
+    }
+    
+     @GetMapping("/hi")
+    public String hello() {
+        return "Hello!";
+    }
 
     // @GetMapping("/hi")
     // public String Hello() {

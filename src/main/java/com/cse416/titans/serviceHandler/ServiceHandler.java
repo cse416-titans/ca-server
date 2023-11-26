@@ -2,6 +2,7 @@ package com.cse416.titans.serviceHandler;
 
 import org.springframework.stereotype.Service;
 
+import com.cse416.titans.model.Ensemble;
 import com.cse416.titans.service.ClusterService;
 import com.cse416.titans.service.ClusterSetService;
 import com.cse416.titans.service.DistrictPlanService;
@@ -74,5 +75,9 @@ public class ServiceHandler {
     public String getEnsembleClusterAssociation(String stateId) {
         // TODO
         return null;
+    }
+
+    public Ensemble getEnsemble(String id) {
+        return ensembleService.getEnsembleById(id);
     }
 }

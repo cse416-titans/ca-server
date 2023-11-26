@@ -9,9 +9,11 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
+@NoArgsConstructor
 @Document(collection = "Clusters")
 public class Cluster {
     @Id
@@ -20,9 +22,14 @@ public class Cluster {
     private String clusterSetId;
     private int numOfPlans;
     private DistrictPlan avgClusterBoundary;
-    private String avgVotingSplit;
-    private int avgNumOfOppDistricts;
-    
+    private double distBtwPlans;
+    private int avgDemocrat;
+    private int avgRepublic;
+    private int avgNumOfAAOpp;
+    private int avgNumOfWhiteOpp;
+    private int avgNumOfAsianOpp;
+    private int avgNumOfHispanicOpp;
+
     @DocumentReference
     @JsonIgnore
     private List<DistrictPlan> plans;

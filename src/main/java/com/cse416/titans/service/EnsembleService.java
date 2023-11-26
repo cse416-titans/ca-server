@@ -17,4 +17,8 @@ public class EnsembleService {
     public Ensemble getEnsembleById(String ensembleId) {
         return ensembleRepo.findByEnsembleId(ensembleId);
     }
+
+    public void addEnsemble(Ensemble ensemble) {
+        ensembleRepo.save(ensemble);
+    }
 }
