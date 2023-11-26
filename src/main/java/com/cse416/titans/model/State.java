@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,9 +18,13 @@ public class State {
     @Id
     private String id;
     private String name;
-    private List<Ensemble> ensembles;
     private Double[] center;
     private DistrictPlan statePlan;
+
+    @DocumentReference
+    @JsonIgnore
+    private List<Ensemble> ensembles;
+
 
     @JsonIgnore
     public String getCurrentPlan() {
