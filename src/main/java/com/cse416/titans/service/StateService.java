@@ -18,7 +18,7 @@ public class StateService {
         return stateRepo.findByStateId(stateId);
     }
 
-    public void addState(State state) {
-        stateRepo.save(state);
+    public State addState(State state) {
+        return stateRepo.save(state);
     }
 }

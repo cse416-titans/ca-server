@@ -10,7 +10,6 @@ public class ClusterService {
     
     private ClusterRepo clusterRepo;
 
-    // Constructor DI
     public ClusterService(ClusterRepo clusterRepo){
         this.clusterRepo = clusterRepo;
     }
@@ -19,7 +18,7 @@ public class ClusterService {
         return clusterRepo.findByClusterId(clusterId);
     }
 
-    public void addCluster(Cluster cluster) {
-        clusterRepo.save(cluster);
+    public Cluster addCluster(Cluster cluster) {
+        return clusterRepo.save(cluster);
     }
 }

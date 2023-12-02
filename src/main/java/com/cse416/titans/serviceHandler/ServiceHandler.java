@@ -1,8 +1,11 @@
 package com.cse416.titans.serviceHandler;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import com.cse416.titans.model.Ensemble;
+import com.cse416.titans.model.Cluster;
+import com.cse416.titans.model.DistrictPlan;
 import com.cse416.titans.service.ClusterService;
 import com.cse416.titans.service.ClusterSetService;
 import com.cse416.titans.service.DistrictPlanService;
@@ -77,7 +80,13 @@ public class ServiceHandler {
         return null;
     }
 
-    public Ensemble getEnsemble(String id) {
-        return ensembleService.getEnsembleById(id);
+    public String getCluster1(String id) {
+        String a = "";
+        Cluster cluster = clusterService.getClusterById(id);
+        List<DistrictPlan> plans = cluster.getPlans();
+        for (DistrictPlan plan: plans) {
+            a = a + " " + plan.getId();
+        }
+        return a;
     }
 }

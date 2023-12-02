@@ -3,8 +3,8 @@ package com.cse416.titans.model;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,24 +19,10 @@ public class Ensemble {
     private String id;
     private String name;
     private String stateId;
-    private int size;
-    
-    @DocumentReference
+    private int numOfPlans;
+    @DBRef
     @JsonIgnore
     private List<ClusterSet> clusterSets;
-
-    // public ClusterSet getClusterSet(String distanceMeasureId) {
-    //     return clusterSets.stream()
-    //         .filter(c -> c.getDistanceMeasureId().equals(distanceMeasureId))
-    //         .findFirst()
-    //         .orElseThrow(NoSuchElementException::new);
-    // }
-
-    // @JsonIgnore
-    // public int getNumOfPlans() {
-    //     // TODO
-    //     return 0;
-    // } 
 
     @JsonIgnore
     public String getDistanceMeasureEvaluation(String[] dms) {

@@ -18,7 +18,7 @@ public class EnsembleService {
         return ensembleRepo.findByEnsembleId(ensembleId);
     }
 
-    public void addEnsemble(Ensemble ensemble) {
-        ensembleRepo.save(ensemble);
+    public Ensemble addEnsemble(Ensemble ensemble) {
+        return ensembleRepo.save(ensemble);
     }
 }

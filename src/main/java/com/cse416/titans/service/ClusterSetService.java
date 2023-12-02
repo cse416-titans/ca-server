@@ -22,7 +22,7 @@ public class ClusterSetService {
         return clusterSetRepo.findByClusterSetId(clusterSetId);
     }
 
-    public void addClusterSet(ClusterSet clusterSet) {
-        clusterSetRepo.save(clusterSet);
+    public ClusterSet addClusterSet(ClusterSet clusterSet) {
+        return clusterSetRepo.save(clusterSet);
     }
 }

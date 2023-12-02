@@ -1,27 +1,21 @@
 package com.cse416.titans;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cse416.titans.model.Ensemble;
 import com.cse416.titans.serviceHandler.ServiceHandler;
-import com.cse416.titans.utils.MakeSummary;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 public class ClientController {
 
     private final ServiceHandler serviceHandler;
-    private final MakeSummary makeSummary;
+    // private final MakeSummary makeSummary;
 
-    public ClientController(ServiceHandler serviceHandler, MakeSummary makeSummary) {
+    public ClientController(ServiceHandler serviceHandler) {
         this.serviceHandler = serviceHandler;
-        this.makeSummary = makeSummary;
+        // this.makeSummary = makeSummary;
     }
 
     @GetMapping(value = "/state", produces = "application/json")
@@ -72,20 +66,14 @@ public class ClientController {
         return null;
     }
 
-    @GetMapping("/ensemble1")
-    public Ensemble getEnsemble() {
-        return serviceHandler.getEnsemble("Ensemble1");
+    @GetMapping("/cluster")
+    public String getCluster1() {
+        return serviceHandler.getCluster1("Cluster1");
     }
     
      @GetMapping("/hi")
     public String hello() {
         return "Hello!";
-    }
-
-    @GetMapping("/makeSummary")
-    public void make() throws IOException, ParseException {
-        File folder = new File("C:\\Users\\ufg11\\Desktop\\ca-server\\src\\main\\java\\com\\cse416\\titans\\reseources\\AZ");
-        makeSummary.makeSummary(null, folder);
     }
 
     // @GetMapping("/hi")
