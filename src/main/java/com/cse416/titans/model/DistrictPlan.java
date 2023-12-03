@@ -1,6 +1,5 @@
 package com.cse416.titans.model;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
@@ -20,7 +19,7 @@ public class DistrictPlan {
     private String id;
     private String name;
     private String clusterId;
-    private Point coordinates; // Why calling it coordinate instead of coordinates?
+    private ArrayList<Double> coordinate; // Why calling it coordinate instead of coordinates?
     private int totalPopulation; // necessary? Every district plans will consequently have same number of totalPopulation for sure
     private int totalDemocraticVotes;
     private int totalRepublicanVotes;
@@ -50,8 +49,36 @@ public class DistrictPlan {
     private JSONObject geoJson;
 
     @JsonIgnore
-    public String getAnalysis() {
-        // TODO
-        return null;
+    public JSONObject getAnalysis() {
+        JSONObject json = new JSONObject();
+        json.put("coordinate", coordinate);
+        json.put("totalPopulation", totalPopulation);
+        json.put("totalDemocraticVotes", totalDemocraticVotes);
+        json.put("totalRepublicanVotes", totalRepublicanVotes);
+        json.put("democraticVotes", democraticVotes);
+        json.put("republicanVotes", republicanVotes);
+        json.put("democraticSplit", democraticSplit);
+        json.put("republicanSplit", republicanSplit);
+        json.put("numOfAAOpp", numOfAAOpp);
+        json.put("numOfWhiteOpp", numOfWhiteOpp);
+        json.put("numOfAsianOpp", numOfAsianOpp);
+        json.put("numOfHispanicOpp", numOfHispanicOpp);
+        json.put("aAOpps", aAOpps);
+        json.put("whiteOpps", whiteOpps);
+        json.put("asianOpps", asianOpps);
+        json.put("hispanicOpps", hispanicOpps);
+        json.put("whitePercentages", whitePercentages);
+        json.put("aAPercentages", aAPercentages);
+        json.put("asianPercentages", asianPercentages);
+        json.put("hispanicPercentages", hispanicPercentages);
+        json.put("indianPercentages", indianPercentages);
+        json.put("avgWhitePercentage", avgWhitePercentage);
+        json.put("avgAAPercentage", avgAAPercentage);
+        json.put("avgAsianPercentage", avgAsianPercentage);
+        json.put("avgHispanicPercentage", avgHispanicPercentage);
+        json.put("avgIndianPercentage", avgIndianPercentage);
+        json.put("availability", availability);
+        return json;
     }
+
 }

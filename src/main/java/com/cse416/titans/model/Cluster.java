@@ -1,9 +1,9 @@
 package com.cse416.titans.model;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,7 +22,7 @@ public class Cluster {
     private String id;
     private String name;
     private String clusterSetId;
-    private Point coordinate;
+    private ArrayList<Double> coordinate;
     private int numOfPlans;
     private ArrayList<Double> planDistances;
     private Double avgPlanDistance;
@@ -46,9 +46,18 @@ public class Cluster {
     }
 
     @JsonIgnore
-    public String getAnalysis() {
-        // TODO
-        return null;
+    public JSONObject getAnalysis() {
+        JSONObject json = new JSONObject();
+        json.put("coordinate", coordinate);
+        json.put("numOfPlans", numOfPlans);
+        json.put("planDistances", planDistances);
+        json.put("avgPlanDistance", avgPlanDistance);
+        json.put("whitePercentages", whitePercentages);
+        json.put("aAPercentages", aAPercentages);
+        json.put("asianPercentages", asianPercentages);
+        json.put("hispanicPercentages", hispanicPercentages);
+        json.put("indianPercentages", indianPercentages);
+        return json;
     }
 
     @JsonIgnore

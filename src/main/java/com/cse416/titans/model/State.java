@@ -1,8 +1,8 @@
 package com.cse416.titans.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,12 +19,11 @@ public class State {
     @Id
     private String id;
     private String name;
-    private ArrayList<Double> center;          // Need to check
+    private JSONObject center;          // Need to check
     private DistrictPlan statePlan;
     @DBRef
     @JsonIgnore
     private List<Ensemble> ensembles;
-
 
     @JsonIgnore
     public String getCurrentPlan() {

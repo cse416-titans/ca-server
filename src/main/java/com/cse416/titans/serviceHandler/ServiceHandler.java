@@ -2,10 +2,15 @@ package com.cse416.titans.serviceHandler;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.cse416.titans.model.Cluster;
+import com.cse416.titans.model.ClusterSet;
 import com.cse416.titans.model.DistrictPlan;
+import com.cse416.titans.model.Ensemble;
+import com.cse416.titans.model.State;
 import com.cse416.titans.service.ClusterService;
 import com.cse416.titans.service.ClusterSetService;
 import com.cse416.titans.service.DistrictPlanService;
@@ -40,34 +45,54 @@ public class ServiceHandler {
         this.districtService = districtService;
     }
 
-    public String getState(String stateId) {
+    public JSONObject getStatePlan(String stateId) {
         // TODO
-        return null;
+        State state = stateService.getStateById(stateId);
+        DistrictPlan plan = state.getStatePlan();
+        JSONObject geoJson = plan.getGeoJson();
+        return geoJson;
     }
 
-    public String getClusteer(Boolean bool, String clusterId, int numOfPlans) {
-        // TODO
-        return null;
+    // public JSONObject getClusterAvgBoundary(Boolean bool, String clusterId, int numOfPlans) {
+    //     // TODO
+    //     return null;
+    // }
+
+    public JSONObject getClusterAvgPlan(String clusterId) {
+        Cluster cluster = clusterService.getClusterById(clusterId);
+        return cluster.getAvgPlan().getGeoJson();
     }
 
-    public String getDistrictPlan(String planId) {
-        // TODO
-        return null;
+    public JSONObject getDistrictPlan(String planId) {
+        DistrictPlan plan = districtPlanService.getPlanById(planId);
+        return plan.getGeoJson();
     }
 
-    public String getEnsembleBoundary(String stateId) {
-        // TODO
-        return null;
+    // public JSONObject getEnsembleBoundary(String stateId) {
+    //     // TODO
+    //     State state = stateService.getStateById(stateId);
+
+    //     return null;
+    // }
+
+    public JSONArray getClusterSetAnalysis(String ensembleId, String DMId) {
+        ClusterSet clusterSet = clusterSetService.getClusterSetByEnsembleAndDMId(ensembleId, DMId);
+        List<Cluster> clusters = clusterSet.getClusters();
+        JSONArray jsonArr = new JSONArray();
+        for (Cluster cluster:clusters) {
+            jsonArr.add(cluster.getAnalysis());
+        }
+        return jsonArr;
     }
 
-    public String getClusterSetAnalysis(String ensembleId, String DMId) {
-        // TODO
-        return null;
-    }
-
-    public String getClusterAnalysis(String clusterId) {
-        // TODO
-        return null;
+    public JSONArray getClusterAnalysis(String clusterId) {
+        Cluster cluster = clusterService.getClusterById(clusterId);
+        List<DistrictPlan> plans = cluster.getPlans();
+        JSONArray jsonArr = new JSONArray();
+        for (DistrictPlan plan:plans) {
+            jsonArr.add(plan.getAnalysis());
+        }
+        return jsonArr;
     }
 
     public String getDMComparison(String ensembleId, String[] dms) {
@@ -80,13 +105,28 @@ public class ServiceHandler {
         return null;
     }
 
-    public String getCluster1(String id) {
-        String a = "";
-        Cluster cluster = clusterService.getClusterById(id);
-        List<DistrictPlan> plans = cluster.getPlans();
-        for (DistrictPlan plan: plans) {
-            a = a + " " + plan.getId();
-        }
-        return a;
+    public DistrictPlan getTestPlan(String id) {
+        return districtPlanService.getPlanById(id);
+    }
+
+    public Cluster getTestCluster(String id) {
+        return clusterService.getClusterById(id);
+    }
+
+    public ClusterSet getTestClusterSet(String id) {
+        return clusterSetService.getClusterSetById(id);
+    }
+
+    public Ensemble getTestEnsemble(String id) {
+        return ensembleService.getEnsembleById(id);
+    }
+
+    public State getTestState(String id) {
+        return stateService.getStateById(id);
+    }
+
+    public JSONObject getTestPlan1(String id) {
+        DistrictPlan plan = districtPlanService.getPlanById(id);
+        return plan.getGeoJson();
     }
 }
