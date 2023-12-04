@@ -15,7 +15,7 @@ import com.cse416.titans.model.State;
 import com.cse416.titans.serviceHandler.ServiceHandler;
 
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:5173")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ClientController {
 
     private final ServiceHandler serviceHandler;
@@ -45,6 +45,7 @@ public class ClientController {
 
     @GetMapping(value = "/clusterAvgPlan", produces = "application/json")
     public JSONObject getClusterAvgPlan(@RequestParam String clusterId) {
+        System.out.println("clusterId: " + clusterId);
         return serviceHandler.getClusterAvgPlan(clusterId);
     }
 
