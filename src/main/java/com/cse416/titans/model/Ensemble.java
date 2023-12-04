@@ -2,6 +2,7 @@ package com.cse416.titans.model;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,14 +26,23 @@ public class Ensemble {
     private List<ClusterSet> clusterSets;
 
     @JsonIgnore
-    public String getDistanceMeasureEvaluation(String[] dms) {
+    public JSONObject getNumOfClusters() {
         // TODO
-        return null;
-    }
-
-    @JsonIgnore
-    public String getNumOfClusters() {
-        // TODO
-        return null;
+        JSONObject json = new JSONObject();
+        json.put("size", numOfPlans);
+        int n = 0;
+        for(ClusterSet set: getClusterSets()) {
+            if(n == 0) {
+                json.put("Hamming", set.getNumOfClusters());
+            }
+            else if(n == 1) {
+                json.put("Entropy", set.getNumOfClusters());
+            }
+            else {
+                json.put("json", set.getNumOfClusters());
+            }
+            n += 1;
+        }
+        return json;
     }
 }

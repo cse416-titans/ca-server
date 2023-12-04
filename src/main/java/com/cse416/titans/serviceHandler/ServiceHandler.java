@@ -79,7 +79,7 @@ public class ServiceHandler {
         ClusterSet clusterSet = clusterSetService.getClusterSetByEnsembleAndDMId(ensembleId, DMId);
         List<Cluster> clusters = clusterSet.getClusters();
         JSONArray jsonArr = new JSONArray();
-        for (Cluster cluster:clusters) {
+        for(Cluster cluster:clusters) {
             jsonArr.add(cluster.getAnalysis());
         }
         return jsonArr;
@@ -89,22 +89,35 @@ public class ServiceHandler {
         Cluster cluster = clusterService.getClusterById(clusterId);
         List<DistrictPlan> plans = cluster.getPlans();
         JSONArray jsonArr = new JSONArray();
-        for (DistrictPlan plan:plans) {
+        for(DistrictPlan plan:plans) {
             jsonArr.add(plan.getAnalysis());
         }
         return jsonArr;
     }
 
-    public String getDMComparison(String ensembleId, String[] dms) {
+    public JSONArray getDMComparison(String ensembleId) {
         // TODO
-        return null;
+        Ensemble ensemble = ensembleService.getEnsembleById(ensembleId);
+        List<ClusterSet> clusterSets = ensemble.getClusterSets();
+        JSONArray jsonArr = new JSONArray();
+        for(ClusterSet set:clusterSets) {
+            jsonArr.add(set.getAnalysis());
+        }
+        return jsonArr;
     }
 
-    public String getEnsembleClusterAssociation(String stateId) {
+    public JSONArray getEnsembleClusterAssociation(String stateId) {
         // TODO
-        return null;
+        State state = stateService.getStateById(stateId);
+        List<Ensemble> ensembles = state.getEnsembles();
+        JSONArray jsonArr = new JSONArray();
+        for(Ensemble ensemble:ensembles) {
+            jsonArr.add(ensemble.getNumOfClusters());
+        }
+        return jsonArr;
     }
 
+    // Testing Codes
     public DistrictPlan getTestPlan(String id) {
         return districtPlanService.getPlanById(id);
     }

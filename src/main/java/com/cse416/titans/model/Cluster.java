@@ -48,6 +48,8 @@ public class Cluster {
     @JsonIgnore
     public JSONObject getAnalysis() {
         JSONObject json = new JSONObject();
+        json.put("id", id);
+        json.put("name", name);
         json.put("coordinate", coordinate);
         json.put("numOfPlans", numOfPlans);
         json.put("planDistances", planDistances);

@@ -51,6 +51,8 @@ public class DistrictPlan {
     @JsonIgnore
     public JSONObject getAnalysis() {
         JSONObject json = new JSONObject();
+        json.put("id", id);
+        json.put("name", name);
         json.put("coordinate", coordinate);
         json.put("totalPopulation", totalPopulation);
         json.put("totalDemocraticVotes", totalDemocraticVotes);

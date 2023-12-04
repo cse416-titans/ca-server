@@ -3,6 +3,7 @@ package com.cse416.titans.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -34,14 +35,16 @@ public class ClusterSet {
     private List<Cluster> clusters;
 
     @JsonIgnore
-    public String getClustersAnalysis() {
-        // TODO
-        return null;
-    }
-
-    @JsonIgnore
-    public String getAnalysis() {
-        // TODO
-        return null;
+    public JSONObject getAnalysis() {
+        JSONObject json = new JSONObject();
+        json.put("numOfClusters", numOfClusters);
+        json.put("clusterDistances", clusterDistances);
+        json.put("avgClusterDistance", avgClusterDistance);
+        json.put("planDistances", planDistances);
+        json.put("avgPlanDistance", avgPlanDistance);
+        json.put("clusterSizes", clusterSizes);
+        json.put("avgClusterSize", avgClusterSize);
+        json.put("copmuteTime", copmuteTime);
+        return json;
     }
 }

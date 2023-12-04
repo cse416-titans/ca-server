@@ -66,15 +66,15 @@ public class ClientController {
     }
 
     @GetMapping(value = "/analysis/DMcomparison", produces = "application/json")
-    public JSONObject getDMComparison(@RequestParam String ensembleId) {
+    public JSONArray getDMComparison(@RequestParam String ensembleId) {
         // TODO
-        return null;
+        return serviceHandler.getDMComparison(ensembleId);
     }
 
     @GetMapping(value = "/analysis/association", produces = "application/json")
-    public JSONObject getEnsembleClusterAssociation(@RequestParam String stateId) {
+    public JSONArray getEnsembleClusterAssociation(@RequestParam String stateId) {
         // TODO
-        return null;
+        return serviceHandler.getEnsembleClusterAssociation(stateId);
     }
 
     @GetMapping("/test/plan")
