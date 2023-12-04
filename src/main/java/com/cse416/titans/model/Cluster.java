@@ -27,11 +27,24 @@ public class Cluster {
     private ArrayList<Double> planDistances;
     private Double avgPlanDistance;
     // private String avgClusterBoundary;
+    private ArrayList<Integer> democraticSplits;
+    private ArrayList<Integer> republicanSplits;
+    private ArrayList<Integer> numOfWhiteOpps;
+    private ArrayList<Integer> numOfAAOpps;
+    private ArrayList<Integer> numOfAsianOpps;
+    private ArrayList<Integer> numOfHispanicOpps;
     private ArrayList<ArrayList<Double>> whitePercentages;
     private ArrayList<ArrayList<Double>> aAPercentages;
     private ArrayList<ArrayList<Double>> asianPercentages;
     private ArrayList<ArrayList<Double>> hispanicPercentages;
     private ArrayList<ArrayList<Double>> indianPercentages;
+    private Integer avgDemocraticSplit;
+    private Integer avgRepublicanSplit;
+    private Integer avgNumOfWhiteOpps;
+    private Integer avgNumOfAAOpps;
+    private Integer avgNumOfAsianOpps;
+    private Integer avgNumOfHispanicOpps;
+
     @DBRef
     @JsonIgnore
     private DistrictPlan avgPlan;
@@ -54,11 +67,24 @@ public class Cluster {
         json.put("numOfPlans", numOfPlans);
         json.put("planDistances", planDistances);
         json.put("avgPlanDistance", avgPlanDistance);
+        json.put("democraticSplits", democraticSplits);
+        json.put("republicanSplits", republicanSplits);
+        json.put("numOfWhiteOpps", numOfWhiteOpps);
+        json.put("numOfAAOpps", numOfAAOpps);
+        json.put("numOfAsianOpps", numOfAsianOpps);
+        json.put("numOfHispanicOpps", numOfHispanicOpps);
         json.put("whitePercentages", whitePercentages);
         json.put("aAPercentages", aAPercentages);
         json.put("asianPercentages", asianPercentages);
         json.put("hispanicPercentages", hispanicPercentages);
         json.put("indianPercentages", indianPercentages);
+        json.put("avgDemocraticSplit", avgDemocraticSplit);
+        json.put("avgRepublicanSplit", avgRepublicanSplit);
+        json.put("avgNumOfWhiteOpps", avgNumOfWhiteOpps);
+        json.put("avgNumOfAAOpps", avgNumOfAAOpps);
+        json.put("avgNumOfAsianOpps", avgNumOfAsianOpps);
+        json.put("avgNumOfHispanicOpps", avgNumOfHispanicOpps);
+        json.put("avgPlan", avgPlan.getGeoJson());
         return json;
     }
 
