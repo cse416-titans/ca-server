@@ -45,10 +45,10 @@ public class Cluster {
     private Integer avgNumOfAsianOpps;
     private Integer avgNumOfHispanicOpps;
 
-    @DBRef
+    @DBRef(lazy = true)
     @JsonIgnore
     private DistrictPlan avgPlan;
-    @DBRef
+    @DBRef(lazy = true)
     @JsonIgnore
     private List<DistrictPlan> plans;
 
@@ -84,7 +84,7 @@ public class Cluster {
         json.put("avgNumOfAAOpps", avgNumOfAAOpps);
         json.put("avgNumOfAsianOpps", avgNumOfAsianOpps);
         json.put("avgNumOfHispanicOpps", avgNumOfHispanicOpps);
-        json.put("avgPlan", avgPlan.getGeoJson());
+        //json.put("avgPlan", avgPlan.getGeoJson());
         return json;
     }
 

@@ -26,11 +26,6 @@ public class ClientController {
         // this.makeSummary = makeSummary;
     }
 
-    @GetMapping(value = "/statePlan", produces = "application/json")
-    public JSONObject getStatePlan(@RequestParam String stateId) {
-        return serviceHandler.getStatePlan(stateId);
-    }
-
     // Need Discussion
     // @GetMapping(value = "/clusterAvgBoundary", produces = "application/json")
     // public JSONObject getClusterAvgBoundary(@RequestParam Boolean showApprox, @RequestParam String clusterId, @RequestParam int numOfPlans) {

@@ -15,4 +15,9 @@ public interface ClusterSetRepo extends MongoRepository<ClusterSet, String>{
 
     @Query("{id: ?0}")
     ClusterSet findByClusterSetId(String clusterSetId);
+
+    /* query that find by clusterSetId but exclude 'clusters' field */
+    @Query(value = "{id: ?0}", fields = "{clusters: 0}")
+    ClusterSet findClusterSetByIdExcludeClusters(String clusterSetId);
+
 }

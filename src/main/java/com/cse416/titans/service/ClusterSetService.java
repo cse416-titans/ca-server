@@ -14,12 +14,16 @@ public class ClusterSetService {
         this.clusterSetRepo = clusterSetRepo;
     }
 
-    public ClusterSet getClusterSetByEnsembleAndDMId(String ensembleId, String distanceMeasureId){
+    public ClusterSet getClusterSetByEnsembleAndDMId(String ensembleId, String distanceMeasureId) {
         return clusterSetRepo.findByEnsembleAndDMId(ensembleId, distanceMeasureId);
     }
 
-    public ClusterSet getClusterSetById(String clusterSetId){
+    public ClusterSet getClusterSetById(String clusterSetId) {
         return clusterSetRepo.findByClusterSetId(clusterSetId);
+    }
+
+    public ClusterSet getClusterSetByIdExcludeClusters(String clusterSetId) {
+        return clusterSetRepo.findClusterSetByIdExcludeClusters(clusterSetId);
     }
 
     public ClusterSet addClusterSet(ClusterSet clusterSet) {

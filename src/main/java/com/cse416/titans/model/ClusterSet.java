@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -30,7 +31,7 @@ public class ClusterSet {
     private ArrayList<Integer> clusterSizes;
     private Double avgClusterSize;
     private Double copmuteTime;                    // Need to check type
-    @DBRef
+    @DBRef(lazy = true)
     @JsonIgnore
     private List<Cluster> clusters;
 

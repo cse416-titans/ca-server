@@ -47,8 +47,7 @@ public class ServiceHandler {
 
     public JSONObject getStatePlan(String stateId) {
         // TODO
-        State state = stateService.getStateById(stateId);
-        DistrictPlan plan = state.getStatePlan();
+        DistrictPlan plan = districtPlanService.getPlanById("curr_" + stateId);
         JSONObject geoJson = plan.getGeoJson();
         return geoJson;
     }
@@ -76,7 +75,10 @@ public class ServiceHandler {
     // }
 
     public JSONArray getClusterSetAnalysis(String ensembleId, String DMId) {
-        ClusterSet clusterSet = clusterSetService.getClusterSetByEnsembleAndDMId(ensembleId, DMId);
+        System.err.println("Current Time: " + System.currentTimeMillis());
+        ClusterSet clusterSet = clusterSetService.getClusterSetById(ensembleId + ":" + DMId);
+        System.err.println("Current Time: " + System.currentTimeMillis());
+
         List<Cluster> clusters = clusterSet.getClusters();
         JSONArray jsonArr = new JSONArray();
         for(Cluster cluster:clusters) {
@@ -86,7 +88,10 @@ public class ServiceHandler {
     }
 
     public JSONArray getClusterAnalysis(String clusterId) {
+        // print current time
+        System.err.println("Current Time: " + System.currentTimeMillis());
         Cluster cluster = clusterService.getClusterById(clusterId);
+        System.err.println("Current Time: " + System.currentTimeMillis());
         List<DistrictPlan> plans = cluster.getPlans();
         JSONArray jsonArr = new JSONArray();
         for(DistrictPlan plan:plans) {
