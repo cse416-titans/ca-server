@@ -14,8 +14,12 @@ public class ClusterService {
         this.clusterRepo = clusterRepo;
     }
 
-    public Cluster getClusterById(String clusterId){
+    public Cluster getClusterById(String clusterId) {
         return clusterRepo.findByClusterId(clusterId);
+    }
+    
+    public Cluster getFirstCluster() {
+        return clusterRepo.findFirstByOrderByClusterIdAsc();
     }
 
     public Cluster addCluster(Cluster cluster) {

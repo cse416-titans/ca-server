@@ -21,7 +21,7 @@ public class State {
     private String name;
     private JSONObject center;          // Need to check
     private DistrictPlan statePlan;
-    @DBRef
+    @DBRef(lazy = true)
     @JsonIgnore
     private List<Ensemble> ensembles;
 
@@ -35,5 +35,17 @@ public class State {
     public String getEnsembleClusterAnalysis() {
         // TODO
         return null;
+    }
+
+    @JsonIgnore
+    public JSONObject getAnalysis() {
+        JSONObject json = new JSONObject();
+
+        // for each ensemble, get analysis
+        for (Ensemble ensemble : ensembles) {
+            json.put(ensemble.getName(), ensemble.getAnalysis());
+        }
+
+        return json;
     }
 }

@@ -2,6 +2,7 @@ package com.cse416.titans.serviceHandler;
 
 import java.util.List;
 
+import org.bson.json.JsonObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import com.cse416.titans.service.StateService;
 
 @Service
 public class ServiceHandler {
-    
+
     private StateService stateService;
     private EnsembleService ensembleService;
     private ClusterSetService clusterSetService;
@@ -29,14 +30,12 @@ public class ServiceHandler {
     private DistrictService districtService;
 
     public ServiceHandler(
-        StateService stateService,
-        EnsembleService ensembleService,
-        ClusterSetService clusterSetService,
-        ClusterService clusterService,
-        DistrictPlanService districtPlanService,
-        DistrictService districtService
-    )
-    {
+            StateService stateService,
+            EnsembleService ensembleService,
+            ClusterSetService clusterSetService,
+            ClusterService clusterService,
+            DistrictPlanService districtPlanService,
+            DistrictService districtService) {
         this.stateService = stateService;
         this.ensembleService = ensembleService;
         this.clusterSetService = clusterSetService;
@@ -47,7 +46,7 @@ public class ServiceHandler {
 
     public JSONObject getStatePlan(String stateId) {
         // TODO
-        DistrictPlan plan = districtPlanService.getPlanById("curr_" + stateId);
+        DistrictPlan plan = districtPlanService.getPlanById("curr_az.json");
         JSONObject geoJson = plan.getGeoJson();
         return geoJson;
     }
@@ -67,6 +66,11 @@ public class ServiceHandler {
         return plan.getGeoJson();
     }
 
+    public JSONObject getDistrictPlanSummary(String planId) {
+        DistrictPlan plan = districtPlanService.getPlanById(planId);
+        return plan.getAnalysisWithGeoJson();
+    }
+
     // public JSONObject getEnsembleBoundary(String stateId) {
     //     // TODO
     //     State state = stateService.getStateById(stateId);
@@ -81,7 +85,7 @@ public class ServiceHandler {
 
         List<Cluster> clusters = clusterSet.getClusters();
         JSONArray jsonArr = new JSONArray();
-        for(Cluster cluster:clusters) {
+        for (Cluster cluster : clusters) {
             jsonArr.add(cluster.getAnalysis());
         }
         return jsonArr;
@@ -94,7 +98,7 @@ public class ServiceHandler {
         System.err.println("Current Time: " + System.currentTimeMillis());
         List<DistrictPlan> plans = cluster.getPlans();
         JSONArray jsonArr = new JSONArray();
-        for(DistrictPlan plan:plans) {
+        for (DistrictPlan plan : plans) {
             jsonArr.add(plan.getAnalysis());
         }
         return jsonArr;
@@ -105,46 +109,42 @@ public class ServiceHandler {
         Ensemble ensemble = ensembleService.getEnsembleById(ensembleId);
         List<ClusterSet> clusterSets = ensemble.getClusterSets();
         JSONArray jsonArr = new JSONArray();
-        for(ClusterSet set:clusterSets) {
+        for (ClusterSet set : clusterSets) {
             jsonArr.add(set.getAnalysis());
         }
         return jsonArr;
     }
 
-    public JSONArray getEnsembleClusterAssociation(String stateId) {
-        // TODO
+    public JSONObject getStateSummary(String stateId) {
+        State state = stateService.getStateById(stateId);
+        Ensemble ensemble = state.getEnsembles().get(0);
+        ClusterSet clusterSet = ensemble.getClusterSets().get(0);
+        Cluster cluster = clusterSet.getClusters().get(0);
+        DistrictPlan plan = cluster.getPlans().get(0);
+        return plan.getAnalysis();
+    }
+
+    public JSONObject getStateAnalysis(String stateId) {
+        State state = stateService.getStateById(stateId);
+        return state.getAnalysis();
+    }
+
+    public JSONObject getEnsembleAnalysis(String ensembleId) {
+        Ensemble ensemble = ensembleService.getEnsembleById(ensembleId);
+        return ensemble.getAnalysis();
+    }
+
+    public JSONObject getEnsembleClusterAssociation(String stateId) {
         State state = stateService.getStateById(stateId);
         List<Ensemble> ensembles = state.getEnsembles();
-        JSONArray jsonArr = new JSONArray();
-        for(Ensemble ensemble:ensembles) {
-            jsonArr.add(ensemble.getNumOfClusters());
+        JSONObject summary = new JSONObject();
+        for (Ensemble ensemble : ensembles) {
+            JSONObject json = new JSONObject();
+            for (ClusterSet clusterSet : ensemble.getClusterSets()) {
+                json.put(clusterSet.getName(), clusterSet.getNumOfClusters());
+            }
+            summary.put(ensemble.getName(), json);
         }
-        return jsonArr;
-    }
-
-    // Testing Codes
-    public DistrictPlan getTestPlan(String id) {
-        return districtPlanService.getPlanById(id);
-    }
-
-    public Cluster getTestCluster(String id) {
-        return clusterService.getClusterById(id);
-    }
-
-    public ClusterSet getTestClusterSet(String id) {
-        return clusterSetService.getClusterSetById(id);
-    }
-
-    public Ensemble getTestEnsemble(String id) {
-        return ensembleService.getEnsembleById(id);
-    }
-
-    public State getTestState(String id) {
-        return stateService.getStateById(id);
-    }
-
-    public JSONObject getTestPlan1(String id) {
-        DistrictPlan plan = districtPlanService.getPlanById(id);
-        return plan.getGeoJson();
+        return summary;
     }
 }

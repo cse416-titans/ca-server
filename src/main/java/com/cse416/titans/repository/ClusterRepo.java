@@ -11,4 +11,8 @@ public interface ClusterRepo extends MongoRepository<Cluster, String>{
     
     @Query("{id: ?0}")
     Cluster findByClusterId(String clusterId);
+
+    /* get first occurrence */
+    @Query(value = "{}", sort = "{clusterId: 1}")
+    Cluster findFirstByOrderByClusterIdAsc();
 }

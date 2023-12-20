@@ -33,9 +33,19 @@ public class ClientController {
     //     return null;
     // }
 
+    @GetMapping(value = "/stateSummary", produces = "application/json")
+    public JSONObject getStateSummary(@RequestParam String stateId) {
+        return serviceHandler.getStateSummary(stateId);
+    }
+    
     @GetMapping(value = "/plan", produces = "application/json")
     public JSONObject getDistrictPlan(@RequestParam String planId) {
         return serviceHandler.getDistrictPlan(planId);
+    }
+
+    @GetMapping(value = "/planSummary", produces = "application/json")
+    public JSONObject getDistrictPlanSummary(@RequestParam String planId) {
+        return serviceHandler.getDistrictPlanSummary(planId);
     }
 
     @GetMapping(value = "/clusterAvgPlan", produces = "application/json")
@@ -68,38 +78,17 @@ public class ClientController {
     }
 
     @GetMapping(value = "/analysis/association", produces = "application/json")
-    public JSONArray getEnsembleClusterAssociation(@RequestParam String stateId) {
-        // TODO
+    public JSONObject getEnsembleClusterAssociation(@RequestParam String stateId) {
         return serviceHandler.getEnsembleClusterAssociation(stateId);
     }
 
-    @GetMapping("/test/plan")
-    public DistrictPlan getTestPlan() {
-        return serviceHandler.getTestPlan("AZ:ensemble-1:clusterSet-1:cluster-2:plan-3");
+    @GetMapping(value = "/analysis/state", produces = "application/json")
+    public JSONObject getStateAnalysis(@RequestParam String stateId) {
+        return serviceHandler.getStateAnalysis(stateId);
     }
 
-    @GetMapping("/test/cluster")
-    public Cluster getTestCluster() {
-        return serviceHandler.getTestCluster("AZ:ensemble-1:clusterSet-1:cluster-2");
-    }
-
-    @GetMapping("/test/clusterSet")
-    public ClusterSet getTestClusterSet() {
-        return serviceHandler.getTestClusterSet("AZ:ensemble-1:clusterSet-1");
-    }
-
-    @GetMapping("/test/ensemble")
-    public Ensemble getTestEnsemble() {
-        return serviceHandler.getTestEnsemble("AZ:ensemble-1");
-    }
-
-    @GetMapping("/test/state")
-    public State getTestState() {
-        return serviceHandler.getTestState("AZ");
-    }
-
-    @GetMapping("/test/plan1")
-    public JSONObject getTestPlan1() {
-        return serviceHandler.getTestPlan1("AZ:ensemble-1:clusterSet-1:cluster-2:plan-5");
+    @GetMapping(value="/analysis/ensemble", produces = "application/json")
+    public JSONObject getEnsembleAnalysis(@RequestParam String ensembleId) {
+        return serviceHandler.getEnsembleAnalysis(ensembleId);
     }
 }
